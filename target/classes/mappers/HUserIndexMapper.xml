@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eddy.health.aide.dao.HUserIndexMapper">
+
+    <select id="selectDataList" resultType="com.eddy.health.aide.vo.IndexDataVo">
+        select
+        ix.animal_heat,
+        ix.blood,
+        ix.glucose,
+        ix.cholesterol,
+        ix.pressure_h,
+        ix.pressure_l,
+        ix.uric,
+        ix.triglyceride,
+        ix.urine_ph,
+        ix.create_time,
+        illness.illness_name,
+        illness.illness_info
+        from h_user_index as ix
+        left join h_illness as illness
+        on illness.id = ix.illness_id
+        <where>
+            <if test="startTime neq null and startTime neq '' and endTime neq null and endTime neq ''">
+                and TO_DAYS(ix.create_time) between TO_DAYS(#{startTime}) and TO_DAYS(#{endTime})
+            </if>
+            <if test="indexId!=null">
+                and ix.id = #{indexId}
+            </if>
+            <if test="userId!=null">
+                and ix.user_id = #{userId}
+            </if>
+        </where>
+        order by ix.create_time asc
+    </select>
+
+    <select id="getDataForDay" resultType="com.eddy.health.aide.vo.IndexDataVo">
+        select
+        ix.animal_heat,
+        ix.blood,
+        ix.glucose,
+        ix.cholesterol,
+        ix.pressure_h,
+        ix.pressure_l,
+        ix.uric,
+        ix.triglyceride,
+        ix.urine_ph,
+        ix.create_time,
+        illness.illness_name,
+        illness.illness_info
+        from h_user_index as ix
+        left join h_illness as illness
+        on illness.id = ix.illness_id
+        <where>
+            <if test="time neq null and time neq ''">
+                and TO_DAYS(ix.create_time) =TO_DAYS(#{time})
+            </if>
+            <if test="userId!=null">
+                and ix.user_id = #{userId}
+            </if>
+        </where>
+        order by ix.create_time desc
+        limit 1
+    </select>
+
+</mapper>

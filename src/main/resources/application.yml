@@ -1,0 +1,58 @@
+mybatis-plus:
+  mapper-locations: classpath:/mappers/*.xml
+  typeAliasesPackage: com.eddy.health.aide.entity
+  global-config:
+    id-type: 0
+    field-strategy: 2
+    db-column-underline: true
+    refresh-mapper: false
+    key-generator: com.baomidou.mybatisplus.incrementer.OracleKeyGenerator
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    jdbc-type-for-null: 'null'
+
+
+
+spring:
+  datasource:
+    username: ${database.user}
+    password: ${database.pwd}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${database.ip}:3306/${database.schema}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    type: com.alibaba.druid.pool.DruidDataSource
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    filters: stat,wall
+    maxPoolPreparedStatementPerConnectionSize: 20
+    useGlobalDataSourceStat: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+    cachePrepStmts: true
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 200MB
+  profiles:   #  Active :dev || pro
+    active: dev
+
+
+logging:
+  level:
+    com.eddy.health.aide: debug
+
+
+server:
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 1000
+    min-spare-threads: 30
+  port: 8080

@@ -1,0 +1,5 @@
+database:
+  user: root
+  pwd: root
+  ip: 127.0.0.1
+  schema: health_aide

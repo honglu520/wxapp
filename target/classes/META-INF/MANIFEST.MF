@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: aide
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: 86183
+Implementation-Vendor-Id: com.eddy.health
+Build-Jdk: 1.8.0_131
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/aide
+Created-By: Maven Integration for Eclipse
+
